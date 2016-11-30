@@ -8,6 +8,7 @@ function getMessages () {
     url: '/messages',
     method: 'GET',
     success: function (msgs) {
+      console.log('msgs in client get', msgs);
       msgs.forEach(function (msg) {
         renderMsgJSON(msg);
       });
