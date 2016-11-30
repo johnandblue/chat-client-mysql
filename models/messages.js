@@ -1,4 +1,4 @@
-const db = require('../config/db.js');
+const mysql = require('koa-mysql');
 
 // setInterval(function () {
   // fs.writeFile(dbPath, JSON.stringify(db));
@@ -9,15 +9,24 @@ const Message = {};
 Message.getAll = function* () {
   let msgs = [];
   try {
-    db.makeConnection();
+    // db.makeConnection();
     // db.connect();
-    const rows = yield db.query('SELECT * from MESSAGES');
+    // const rows = yield db.query('SELECT * from MESSAGES');
+
+      const connection = mysql.createConnection({
+        user: 'root',
+        password: 'password',
+        database: 'chatapp',
+        host: 'localhost'
+      });
+
+    let rows = yield connection.query('SELECT * from MESSAGES');
 
     console.log('rows',rows);
     rows.forEach(function (msg) {
       msgs.push({ content: msg.content, timeStamp: msg.timestamp, userId: msg.uid });
     });
-    this.body = rows;
+    this.body = msgs;
     // db.end();
   }
   catch (err) {
@@ -26,7 +35,7 @@ Message.getAll = function* () {
       this.body = { error: err };
   }
   console.log('msgs',msgs);
-  return rows;
+  return msgs;
 }
 
 Message.postMessage = function (msg) {
