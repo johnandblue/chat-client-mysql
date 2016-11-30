@@ -1,4 +1,4 @@
-const mysql = require('koa-mysql');
+const mysql = require('mysql');
 
 // setInterval(function () {
   // fs.writeFile(dbPath, JSON.stringify(db));
@@ -9,9 +9,6 @@ const Message = {};
 Message.getAll = function* () {
   let msgs = [];
   try {
-    // db.makeConnection();
-    // db.connect();
-    // const rows = yield db.query('SELECT * from MESSAGES');
 
       const connection = mysql.createConnection({
         user: 'root',
@@ -20,14 +17,32 @@ Message.getAll = function* () {
         host: 'localhost'
       });
 
-    let rows = yield connection.query('SELECT * from MESSAGES');
 
-    console.log('rows',rows);
-    rows.forEach(function (msg) {
-      msgs.push({ content: msg.content, timeStamp: msg.timestamp, userId: msg.uid });
-    });
-    this.body = msgs;
-    // db.end();
+
+      connection.connect(function (err) {
+        if (err) {
+          console.error('error connecting to db: ' + err.stack);
+          return;
+        }
+
+        console.log('connected to db as id ' + connection.threadId);
+
+      });
+
+      connection.query('SELECT * from messages', function(err, rows, fields) {
+        if (err) throw err;
+
+          let msgs = [];
+          console.log('rows',rows);
+          rows.forEach(function (msg) {
+            msgs.push({ content: msg.content, timeStamp: msg.timestamp, userId: msg.uid });
+          });
+          this.body = msgs;
+
+      });
+
+      connection.end();
+
   }
   catch (err) {
       // 500 Internal Server Error
