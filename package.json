@@ -1,0 +1,26 @@
+{
+  "name": "chat-client-mysql",
+  "version": "1.0.0",
+  "description": "chat client built using koa and mysql",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2rod/chat-client-mysql.git"
+  },
+  "author": "Rod Reyes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/2rod/chat-client-mysql/issues"
+  },
+  "homepage": "https://github.com/2rod/chat-client-mysql#readme",
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "koa": "^1.2.4",
+    "koa-bodyparser": "^2.3.0",
+    "koa-router": "^5.4.0",
+    "koa-static": "^2.0.0"
+  }
+}
