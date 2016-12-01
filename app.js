@@ -8,13 +8,14 @@ const app = koa();
 const serve = require('koa-static');
 const router = require('./router.js');
 const bodyParser = require('koa-bodyparser')();
-const db = require('./config/db.js');
+const sequelize = require('./config/db.js');
 
 app.use(serve('./src'));
 app.use(bodyParser);
 app.use(router.routes());
 
-db.connect(function (err) {
+sequelize.db.sync().then(function (err) {
+  if (err) console.error('error connecting: ' + err.stack);
   app.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
   });
