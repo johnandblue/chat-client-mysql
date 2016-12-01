@@ -8,11 +8,14 @@ const app = koa();
 const serve = require('koa-static');
 const router = require('./router.js');
 const bodyParser = require('koa-bodyparser')();
+const db = require('./config/db.js');
 
 app.use(serve('./src'));
 app.use(bodyParser);
 app.use(router.routes());
 
-app.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+db.connect(function (err) {
+  app.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
+  });
 });

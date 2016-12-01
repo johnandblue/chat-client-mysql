@@ -11,8 +11,7 @@ messagesCtrl.postMessage = function* () {
 };
 
 messagesCtrl.getMessages = function* () {
-  yield this.body = Message.getAll();
-  console.log('this.body', this.body);
+  this.body = yield Message.getAll();
 }
 
 module.exports = messagesCtrl;
