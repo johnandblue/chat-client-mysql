@@ -1,11 +1,11 @@
-const db = require('../config/db.js');
+const sequelize = require('../config/db.js');
 
 const Message = {};
 
 Message.getAll = function* () {
   return new Promise(function (resolve, reject) {
     try {
-      db.query('SELECT * from messages', function (err, rows, fields) {
+      sequelize.query('SELECT * from messages', function (err, rows, fields) {
         if (err) reject(err);
         // console.log('rows',rows);
         resolve(rows);
