@@ -24,6 +24,7 @@
     "koa-router": "^5.4.0",
     "koa-static": "^2.0.0",
     "mongodb": "^2.2.12",
+    "mongoose": "^4.7.1",
     "mysql": "^2.12.0"
   }
 }
