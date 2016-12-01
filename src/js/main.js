@@ -41,7 +41,7 @@ function renderMsg (msg, className) {
   scrollWindow();
 }
 
-function saveMessage (userId, content, timeStamp) {
+function saveMessage (user, content, timestamp) {
   $.ajax({
     url: '/messages',
     method: 'POST',
@@ -50,7 +50,7 @@ function saveMessage (userId, content, timeStamp) {
     data: JSON.stringify({
       user,
       content,
-      timeStamp
+      timestamp
     }),
     success: function (data) {
       console.log('data saved:', data);

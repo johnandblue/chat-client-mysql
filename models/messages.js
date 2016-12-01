@@ -8,7 +8,10 @@ Message.getAll = function* () {
 };
 
 Message.postMessage = function (msg) {
-  // db.msgs.push(msg);
+  MsgsModel.Message.create(msg, function (err, message) {
+    if (err) handleError(err);
+    console.log('message', message);
+  });
 };
 
 module.exports = Message;
