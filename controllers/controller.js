@@ -14,4 +14,8 @@ messagesCtrl.getMessages = function* () {
   this.body = yield Message.getAll();
 }
 
+messagesCtrl.deleteMessages = function* () {
+  yield Message.deleteAll();
+}
+
 module.exports = messagesCtrl;

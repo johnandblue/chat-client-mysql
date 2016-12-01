@@ -9,10 +9,12 @@ function getMessages () {
     method: 'GET',
     success: function (msgs) {
       // console.log('msgs in client get', msgs);
-      msgs.forEach(function (msg) {
-        renderMsgJSON(msg);
-      });
-      scrollWindow();
+      if (msgs) {
+        msgs.forEach(function (msg) {
+          renderMsgJSON(msg);
+        });
+        scrollWindow();
+      }
     },
     error: function(err) {
       console.log(err);
@@ -81,4 +83,17 @@ $(document).ready(function () {
       getQuote();
     }
   });
+
+  $('.clearMsgs a').click(function (event) {
+    event.preventDefault();
+    $.ajax({
+      url: '/delete',
+      success: function () {
+        console.log('message history cleared!');
+      },
+      error: function (err) {
+        console.log(err);
+      },
+    });
+  })
 });
