@@ -20,10 +20,9 @@
     "jquery": "^3.1.1",
     "koa": "^1.2.4",
     "koa-bodyparser": "^2.3.0",
-    "koa-mysql": "^1.0.3",
     "koa-router": "^5.4.0",
     "koa-static": "^2.0.0",
+    "mongodb": "^2.2.12",
     "mysql": "^2.12.0",
-    "sequelize": "^3.27.0"
   }
 }
