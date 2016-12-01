@@ -1,7 +1,3 @@
-const Sequelize = require('sequelize');
+const MongoClient = require('mongodb').MongoClient;
 
-let SequelizeConnection = {};
-
-SequelizeConnection.db = new Sequelize('chatapp2', 'root', 'password');
-
-module.exports = SequelizeConnection;
+module.exports = MongoClient;
