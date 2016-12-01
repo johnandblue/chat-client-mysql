@@ -1,3 +1,5 @@
-const MongoClient = require('mongodb').MongoClient;
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/chatapp');
+const db = mongoose.connection;
 
-module.exports = MongoClient;
+module.exports = db;
