@@ -10,11 +10,4 @@ MessagesSchema.msgsSchema = mongoose.Schema({
 
 MessagesSchema.Message = mongoose.model('Message', MessagesSchema.msgsSchema);
 
-MessagesSchema.Message.create({content: 'Test Message 1', user: 'user1'}, function (err, message) {
-  if (err) return handleError(err);
-});
-MessagesSchema.Message.create({content: 'Test Message 2', user: 'user2'}, function (err, message) {
-  if (err) return handleError(err);
-});
-
 module.exports = MessagesSchema;

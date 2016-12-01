@@ -29,7 +29,7 @@ function scrollWindow () {
 function renderMsgJSON (msg, className) {
   const $msgHtml = $('<div class="msg">').html(msg.content);
   if (className) $msgHtml.addClass(className);
-  else if (msg.userId === 'user1') $msgHtml.addClass('userMsg');
+  else if (msg.user === 'user1') $msgHtml.addClass('userMsg');
   $('.chatWindow').append($msgHtml);
   scrollWindow();
 }
@@ -48,7 +48,7 @@ function saveMessage (userId, content, timeStamp) {
     contentType: 'application/json',
     dataType: 'json',
     data: JSON.stringify({
-      userId,
+      user,
       content,
       timeStamp
     }),
