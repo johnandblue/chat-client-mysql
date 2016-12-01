@@ -1,14 +1,15 @@
 const mongodb = require('../config/db.js');
+const MsgsModel = require('./messages_db.js');
 
 const Message = {};
 
 Message.getAll = function* () {
   return new Promise(function (resolve, reject) {
     try {
-      mongodb.query('SELECT * from messages', function (err, rows, fields) {
-        if (err) reject(err);
-        // console.log('rows',rows);
-        resolve(rows);
+      MsgsModel.find(function (err, messages) {
+        if (err) return console.error(err);
+        console.log('messages',messages);
+        resolve(messages);
       });
     }
     catch (err) {
