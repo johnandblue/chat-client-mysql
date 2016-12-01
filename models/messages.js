@@ -1,11 +1,11 @@
-const sequelize = require('../config/db.js');
+const mongodb = require('../config/db.js');
 
 const Message = {};
 
 Message.getAll = function* () {
   return new Promise(function (resolve, reject) {
     try {
-      sequelize.query('SELECT * from messages', function (err, rows, fields) {
+      mongodb.query('SELECT * from messages', function (err, rows, fields) {
         if (err) reject(err);
         // console.log('rows',rows);
         resolve(rows);
