@@ -4,7 +4,7 @@ const MsgsModel = require('./messages_db.js');
 const Message = {};
 
 Message.getAll = function* () {
-  yield MsgsModel.Message.find();
+  return MsgsModel.Message.find();
 };
 
 Message.postMessage = function (msg) {
@@ -14,11 +14,14 @@ Message.postMessage = function (msg) {
   });
 };
 
-Message.deleteAll = function (msg) {
-  mongodb.db.dropCollection('messages', function (err, message) {
-    if (err) handleError(err);
-    console.log('message', message);
-  });
+Message.deleteAll = function* () {
+  mongodb.db.listCollections({name: 'messages'})
+    .next(function (err, collinfo) {
+        if (collinfo) {
+            // The collection exists
+            mongodb.db.dropCollection('messages');
+        }
+    });
 }
 
 module.exports = Message;

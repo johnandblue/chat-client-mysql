@@ -88,8 +88,9 @@ $(document).ready(function () {
     event.preventDefault();
     $.ajax({
       url: '/delete',
-      success: function () {
-        console.log('message history cleared!');
+      success: function (data) {
+        console.log('message history cleared!', data);
+        $('.chatWindow').html();
       },
       error: function (err) {
         console.log(err);

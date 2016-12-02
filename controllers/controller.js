@@ -16,6 +16,7 @@ messagesCtrl.getMessages = function* () {
 
 messagesCtrl.deleteMessages = function* () {
   yield Message.deleteAll();
+  this.status = 202;
 }
 
 module.exports = messagesCtrl;
