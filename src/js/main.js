@@ -4,29 +4,20 @@ function parseQuote (response) {
   socket.emit('new message', {user: 'user2', content: response.quoteText});
 }
 
-function getMessages () {
-  $.ajax({
-    url: '/messages',
-    method: 'GET',
-    success: function (msgs) {
-      if (msgs) {
-        msgs.forEach(function (msg) {
-          renderMsgJSON(msg);
-        });
-        scrollWindow();
-      }
-    },
-    error: function(err) {
-      console.log(err);
-      return;
-    },
-  });
-}
-
 let socket = io();
-socket.on('new message', function (data) {
-  // console.log('new message data', data);
-  renderMsgJSON(data);
+
+socket.on('messages', function(msgs) {
+  if (msgs) {
+    msgs.forEach(function (msg) {
+      renderMsgJSON(msg);
+    });
+    scrollWindow();
+  }
+});
+
+socket.on('new message', function (msgs) {
+  // console.log('msgs in client: ', msgs);
+  renderMsgJSON(msgs);
 });
 
 function scrollWindow () {
@@ -49,25 +40,25 @@ function renderMsg (msg, className) {
   scrollWindow();
 }
 
-function saveMessage (user, content, timestamp) {
-  $.ajax({
-    url: '/messages',
-    method: 'POST',
-    contentType: 'application/json',
-    dataType: 'json',
-    data: JSON.stringify({
-      user,
-      content,
-      timestamp
-    }),
-    success: function (data) {
-      console.log('data saved:', data);
-    },
-    error: function (err) {
-      console.log('in da error', err);
-    },
-  });
-}
+// function saveMessage (user, content, timestamp) {
+//   $.ajax({
+//     url: '/messages',
+//     method: 'POST',
+//     contentType: 'application/json',
+//     dataType: 'json',
+//     data: JSON.stringify({
+//       user,
+//       content,
+//       timestamp
+//     }),
+//     success: function (data) {
+//       console.log('data saved:', data);
+//     },
+//     error: function (err) {
+//       console.log('in da error', err);
+//     },
+//   });
+// }
 
 function getQuote() {
   $.ajax({
@@ -78,7 +69,7 @@ function getQuote() {
 }
 
 $(document).ready(function () {
-  getMessages();
+  // getMessages();
   $('#target').submit(function (event) {
     event.preventDefault();
     let userText = $('#textbox').val();

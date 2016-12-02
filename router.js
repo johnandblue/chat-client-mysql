@@ -4,6 +4,8 @@ const co = require('co');
 
 const controller = require('./controllers/controller.js');
 const io = require('./app.js');
+const socket_events = require('./socket_events.js');
+socket_events(io);
 
 router.use(router.routes());
 router.post('/messages', controller.postMessage);
