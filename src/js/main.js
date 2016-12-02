@@ -1,6 +1,7 @@
 function parseQuote (response) {
   renderMsg(response.quoteText, 'response');
   saveMessage('user2', response.quoteText, Date.now());
+  socket.emit('new message', {user: 'user2', content: response.quoteText});
 }
 
 function getMessages () {
@@ -8,7 +9,6 @@ function getMessages () {
     url: '/messages',
     method: 'GET',
     success: function (msgs) {
-      // console.log('msgs in client get', msgs);
       if (msgs) {
         msgs.forEach(function (msg) {
           renderMsgJSON(msg);
@@ -22,6 +22,12 @@ function getMessages () {
     },
   });
 }
+
+let socket = io();
+socket.on('new message', function (data) {
+  // console.log('new message data', data);
+  renderMsgJSON(data);
+});
 
 function scrollWindow () {
   let chatDiv = document.getElementsByClassName('chatWindow')[0];
@@ -58,7 +64,7 @@ function saveMessage (user, content, timestamp) {
       console.log('data saved:', data);
     },
     error: function (err) {
-      console.log(err);
+      console.log('in da error', err);
     },
   });
 }
@@ -80,6 +86,7 @@ $(document).ready(function () {
       renderMsg(userText, 'userMsg');
       $('#textbox').val('');
       saveMessage('user1', userText, Date.now());
+      socket.emit('new message', {user: 'user1', content: userText});
       getQuote();
     }
   });

@@ -10,7 +10,7 @@ Message.getAll = function* () {
 Message.postMessage = function (msg) {
   MsgsModel.Message.create(msg, function (err, message) {
     if (err) handleError(err);
-    console.log('message', message);
+    // console.log('message', message);
   });
 };
 

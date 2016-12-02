@@ -15,12 +15,18 @@ app.use(serve('./src'));
 app.use(bodyParser);
 app.use(router.routes());
 
+const socketEvents = require('./socket_events.js');
+const server = require('http').Server(app.callback());
+const io = require('socket.io')(server);
+
+socketEvents(io);
+
 db.on('error', console.error.bind(console, 'error connecting: '));
 db.once('open', function () {
   console.log('Connection established to mongodb');
   }
 );
 
-app.listen(port, hostname, () => {
+server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
 });
