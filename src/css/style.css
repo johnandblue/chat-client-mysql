@@ -97,6 +97,13 @@ a:hover {
     float: left;
 }
 
+.timestamp {
+    float: left;
+    clear: left;
+    font-size: x-small;
+    margin: 5px 10px;
+}
+
 ul {
     list-style-type: none;
     margin:10px 0;

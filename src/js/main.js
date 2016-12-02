@@ -26,10 +26,11 @@ function scrollWindow () {
 }
 
 function renderMsgJSON (msg, className) {
-  const $msgHtml = $('<div class="msg">').html(msg.content);
+  const $msgHtml = $('<div>').addClass('msg').html(msg.content);
+  const $msgTime = $('<div>').addClass('timestamp').html(moment.unix(msg.timestamp).calendar());
   if (className) $msgHtml.addClass(className);
   else if (msg.user === 'user1') $msgHtml.addClass('userMsg');
-  $('.chatWindow').append($msgHtml);
+  $('.chatWindow').append($msgHtml).append();
   scrollWindow();
 }
 
