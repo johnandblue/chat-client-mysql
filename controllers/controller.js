@@ -1,22 +1,16 @@
-var Message = require('../models/messages.js')
+var Message = require('../models/messages_db.js')
 
-const fs = require('fs');
-const path = require('path');
-
-const messagesCtrl = {};
-
-messagesCtrl.postMessage = function* () {
-  Message.postMessage(this.request.body);
-  this.status = 201;
+exports.postMessage = function* () {
+  const newMessage = new Message(this.request.body);
+  yield newMessage.save();
+  this.status = 200;
 };
 
-messagesCtrl.getMessages = function* () {
-  this.body = yield Message.getAll();
+exports.getMessages = function* () {
+  this.body = yield Message.find();
 }
 
-messagesCtrl.deleteMessages = function* () {
-  yield Message.deleteAll();
-  this.status = 202;
+exports.deleteMessages = function* () {
+  yield Message.remove();
+  this.status = 200;
 }
-
-module.exports = messagesCtrl;

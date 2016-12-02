@@ -1,6 +1,6 @@
 function parseQuote (response) {
   renderMsg(response.quoteText, 'response');
-  saveMessage('user2', response.quoteText, Date.now());
+  // saveMessage('user2', response.quoteText, Date.now());
   socket.emit('new message', {user: 'user2', content: response.quoteText});
 }
 
@@ -85,7 +85,7 @@ $(document).ready(function () {
     if (userText) {
       renderMsg(userText, 'userMsg');
       $('#textbox').val('');
-      saveMessage('user1', userText, Date.now());
+      // saveMessage('user1', userText, Date.now());
       socket.emit('new message', {user: 'user1', content: userText});
       getQuote();
     }

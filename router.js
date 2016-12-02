@@ -1,8 +1,9 @@
-const koa = require('koa');
-const router = require('koa-router')();
-const controller = require('./controllers/controller.js');
 
-const path = require('path');
+const router = require('koa-router')();
+const co = require('co');
+
+const controller = require('./controllers/controller.js');
+const io = require('./app.js');
 
 router.use(router.routes());
 router.post('/messages', controller.postMessage);

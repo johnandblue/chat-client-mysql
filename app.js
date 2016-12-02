@@ -3,8 +3,9 @@
 const hostname = '127.0.0.1';
 const port = 3000;
 
-const koa = require('koa');
-const app = koa();
+const app = require('koa')();
+const server = require('http').createServer(app.callback());
+module.exports = require('socket.io')(server);
 const serve = require('koa-static');
 const router = require('./router.js');
 const bodyParser = require('koa-bodyparser')();
@@ -15,18 +16,9 @@ app.use(serve('./src'));
 app.use(bodyParser);
 app.use(router.routes());
 
-const socketEvents = require('./socket_events.js');
-const server = require('http').Server(app.callback());
-const io = require('socket.io')(server);
-
-socketEvents(io);
-
 db.on('error', console.error.bind(console, 'error connecting: '));
 db.once('open', function () {
-  console.log('Connection established to mongodb');
-  }
-);
-
-server.listen(port, hostname, () => {
+  server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
+  });
 });

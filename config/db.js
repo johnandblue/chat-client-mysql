@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/chatapp');
-const db = mongoose.connection;
 
-module.exports = db;
+mongoose.Promise = global.Promise;
+
+mongoose.connect('mongodb://localhost/chatapp');
+
+module.exports = mongoose.connection;
