@@ -1,7 +1,12 @@
 body,p {
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: Muli, Arial, Helvetica, sans-serif;
     font-size:14px;
     margin:0;
+}
+
+h1 {
+    font-size: 3em;
+    text-shadow: #000 3px 2px 4px;
 }
 
 h3 {
@@ -14,13 +19,13 @@ h4 {
 }
 
 header {
-    height : 5em;
-    background-color : lightgray;
+    height : 7em;
+    background-color : #ff7b10;
     text-align:center;
     width:80%;
     float:right;
     padding: 1%;
-
+    color: white;
 }
 
 a, a:hover, a:visited, a:active {
@@ -38,7 +43,7 @@ a:hover {
 
 #sidebar{
     width:16%;
-    background-color:darkcyan;
+    background-color: #505050;
     float:left;
     position:absolute;
     top:0;
@@ -50,9 +55,11 @@ a:hover {
 .chatWindow, .errorPage {
     position: absolute;
     right: 0;
-    top: 6.3em;
+    top: 8em;
     bottom: 3.4em;
     background-color: #f9f8f8;
+    background: url('/img/background_chat.jpg');
+    background-size: cover;
     text-align:center;
     width: 80%;
     float: right;
@@ -75,16 +82,18 @@ a:hover {
     margin-top: 10px;
     text-align: center;
     padding: 10px;
-    border: 1px lightgray solid;
+    border: 1px #333 solid;
     border-radius: 10px;
     width: 50%;
     clear: both;
-    background-color: aliceblue;
+    background-color: #FFEAAB;
     float: right;
+    box-shadow: 2px 4px 5px #888;
 }
 
 .userMsg {
-    background-color: lightyellow;
+    background-color: #00c5d3;
+    color: white;
     float: left;
 }
 
